@@ -1,4 +1,8 @@
 function sendMessageToActiveTab(message, callback) {
+  // if not available
+  if(!chrome.tabs) {
+    return;
+  }
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     tab = tabs[0];
     chrome.tabs.sendMessage(tab.id, message, callback);
